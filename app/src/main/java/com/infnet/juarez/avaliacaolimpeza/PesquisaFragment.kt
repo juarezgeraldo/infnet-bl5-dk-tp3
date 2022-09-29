@@ -1,23 +1,23 @@
 package com.infnet.juarez.avaliacaolimpeza
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.firebase.auth.FirebaseUser
 import com.infnet.juarez.avaliacaolimpeza.DAO.EstabelecimentoDAO
 import com.infnet.juarez.avaliacaolimpeza.DAO.PesquisaDAO
 import com.infnet.juarez.avaliacaolimpeza.modelo.Estabelecimento
 import com.infnet.juarez.avaliacaolimpeza.modelo.PerguntaResposta
 import com.infnet.juarez.avaliacaolimpeza.modelo.Pesquisa
 import com.infnet.juarez.avaliacaolimpeza.modelo.Usuario
+
 
 class PesquisaFragment : Fragment(), RecyclerViewItemListner {
 
@@ -29,11 +29,10 @@ class PesquisaFragment : Fragment(), RecyclerViewItemListner {
 
     private val sharedViewModel: DadosViewModel by activityViewModels()
 
-    private var pesquisas: ArrayList<Pesquisa> = ArrayList()
-    private var listaIdEstabelecimentos: ArrayList<String> = ArrayList()
-    private var _binding: Fragment? = null
+    private var idPesquisas: ArrayList<String> = ArrayList()
+    private var idEstabelecimentos: ArrayList<String> = ArrayList()
 
-    private val binding get() = _binding!!
+    private var listaIdEstabelecimentos: ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,9 +56,13 @@ class PesquisaFragment : Fragment(), RecyclerViewItemListner {
         val edtNomePesquisa = fragmentBinding.findViewById<EditText>(R.id.edtNomePesquisa)
         val spnEstabelecimento = fragmentBinding.findViewById<Spinner>(R.id.spnEstabelecimento)
         val btnSalvar = fragmentBinding.findViewById<Button>(R.id.btnSalvar)
+        val fabPesquisaLogout = fragmentBinding.findViewById<FloatingActionButton>(R.id.fabPesquisaLogout)
 
         txtUserPesquisa.setText(usuario.email)
 
+        fabPesquisaLogout.setOnClickListener(){
+            findNavController().navigate(R.id.action_pesquisaFragment_to_loginFragment)
+        }
         btnSalvar.setOnClickListener {
             if (edtNomePesquisa.text.toString().isEmpty()) {
                 Toast.makeText(
@@ -114,16 +117,19 @@ class PesquisaFragment : Fragment(), RecyclerViewItemListner {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
     }
 
     private fun atualizaListaPesquisas() {
         val obj = pesquisaDAO.listar()
         val pesquisas: ArrayList<Pesquisa> = ArrayList()
+        idPesquisas = ArrayList()
+        idEstabelecimentos = ArrayList()
         obj.addOnSuccessListener {
             for (objeto in it) {
                 val pesquisa = objeto.toObject(Pesquisa::class.java)
                 pesquisas.add(pesquisa)
+                idPesquisas.add(pesquisa.id!!)
+                idEstabelecimentos.add(pesquisa.estabelecimento?.id!!)
             }
             val lstPesquisas = this.requireActivity().findViewById<RecyclerView>(R.id.lstPesquisas)
             lstPesquisas.layoutManager = LinearLayoutManager(this.requireActivity())
@@ -139,11 +145,13 @@ class PesquisaFragment : Fragment(), RecyclerViewItemListner {
     private fun atualizaListaEstabelecimentos() {
         val objEstabelecimento = estabelecimentoDAO.listar()
         val nomesEstabelecimento = ArrayList<String>()
+        var posSpin: Int = 0
         objEstabelecimento.addOnSuccessListener {
             for (objeto in it) {
                 val estabelecimento = objeto.toObject(Estabelecimento::class.java)
                 nomesEstabelecimento.add(estabelecimento.nome!!)
                 listaIdEstabelecimentos.add(estabelecimento.id!!)
+                posSpin += 1
             }
             val spnEstabelecimento =
                 this.requireActivity().findViewById<Spinner>(R.id.spnEstabelecimento)
@@ -189,12 +197,10 @@ class PesquisaFragment : Fragment(), RecyclerViewItemListner {
         atualizaListaPesquisas()
     }
 
-    override fun recyclerViewBotaoAlterarClicked(view: View, id: String) {
-        var pesquisa: Pesquisa = Pesquisa()
-        val obj = pesquisaDAO.obter(id)
+    override fun recyclerViewBotaoAlterarClicked(view: View, pos: Int) {
+        val obj = pesquisaDAO.obter(idPesquisas[pos])
         obj.addOnSuccessListener {
             pesquisa = it.toObject(Pesquisa::class.java)!!
-
             val txtId = this.requireActivity().findViewById<TextView>(R.id.txtId)
             val txtUserPesquisa =
                 this.requireActivity().findViewById<TextView>(R.id.txtIdUserPesquisa)
@@ -204,16 +210,15 @@ class PesquisaFragment : Fragment(), RecyclerViewItemListner {
                 this.requireActivity().findViewById<Spinner>(R.id.spnEstabelecimento)
 
             txtId.setText(pesquisa.id)
-            txtUserPesquisa.setText(pesquisa.user?.email ?: null)
+            txtUserPesquisa.setText(pesquisa.user?.email!!)
             edtNomePesquisa.setText(pesquisa.nomePesquisa)
-            spnEstabelecimento.setSelection(spnEstabelecimento.selectedItemPosition)
-        }.addOnFailureListener {
+            spnEstabelecimento.setSelection(1)
+        }.addOnFailureListener{
         }
     }
 
-    override fun recyclerViewBotaoExcluirClicked(view: View, id: String): Boolean {
-        var pesquisa: Pesquisa = Pesquisa()
-        val obj = pesquisaDAO.obter(id)
+    override fun recyclerViewBotaoExcluirClicked(view: View, pos: Int): Boolean {
+        val obj = pesquisaDAO.obter(idPesquisas[pos])
         obj.addOnSuccessListener {
             pesquisa = it.toObject(Pesquisa::class.java)!!
 
@@ -223,13 +228,9 @@ class PesquisaFragment : Fragment(), RecyclerViewItemListner {
         return true
     }
 
-    override fun recyclerViewBotaoEditaClicked(
-        view: View,
-        idPesquisa: String,
-        idEstabelecimento: String
-    ) {
-        val objPesquisa = pesquisaDAO.obter(idPesquisa)
-        val objEstabelecimento = estabelecimentoDAO.obter(idEstabelecimento)
+    override fun recyclerViewBotaoEditaClicked(view: View, pos: Int) {
+        val objPesquisa = pesquisaDAO.obter(idPesquisas[pos])
+        val objEstabelecimento = estabelecimentoDAO.obter(idEstabelecimentos[pos])
         objPesquisa.addOnSuccessListener {
             pesquisa = it.toObject(Pesquisa::class.java)!!
             objEstabelecimento.addOnSuccessListener {
@@ -251,3 +252,4 @@ class PesquisaFragment : Fragment(), RecyclerViewItemListner {
     }
 
 }
+

@@ -18,12 +18,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/navegacao" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/common_full_open_on_phone"
-        tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

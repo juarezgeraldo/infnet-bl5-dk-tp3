@@ -136,6 +136,7 @@ class LoginFragment : Fragment() {
 
             val providers = arrayListOf(
                 AuthUI.IdpConfig.EmailBuilder().build()
+//                AuthUI.IdpConfig.FacebookBuilder().build()
             )
 
             val signInIntent = AuthUI.getInstance()

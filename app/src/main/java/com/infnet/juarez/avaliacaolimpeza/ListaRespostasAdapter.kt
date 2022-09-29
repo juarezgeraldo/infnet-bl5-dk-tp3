@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.infnet.juarez.avaliacaolimpeza.modelo.PerguntaResposta
@@ -40,11 +41,9 @@ class ListaRespostasAdapter(private val listaPerguntasRespostas: ArrayList<Pergu
             itemListner: RecyclerViewItemListner,
             position: Int
         ) {
-            val txtIdPerguntaResposta =
-                itemView.findViewById<TextView>(R.id.txtIdPerguntasRespostas)
-            txtIdPerguntaResposta.setText(perguntaResposta.id.toString())
             val txtPerguntaResposta = itemView.findViewById<TextView>(R.id.txtPerguntasRespostas)
             txtPerguntaResposta.setText(perguntaResposta.pergunta)
+            val groupRadioButton = itemView.findViewById<RadioGroup>(R.id.radioGroup)
             val rdbSim = itemView.findViewById<RadioButton>(R.id.rdbSim)
             val rdbNao = itemView.findViewById<RadioButton>(R.id.rdbNao)
 
@@ -61,12 +60,14 @@ class ListaRespostasAdapter(private val listaPerguntasRespostas: ArrayList<Pergu
                 }
             }
 
-            val perguntaResposta = PerguntaResposta()
-            perguntaResposta.id = txtIdPerguntaResposta.text.toString()
             perguntaResposta.pergunta = txtPerguntaResposta.text.toString()
             perguntaResposta.resposta = rdbSim.isChecked
 
-            rdbSim.setOnClickListener() {
+            groupRadioButton.setOnCheckedChangeListener { radioGroup, i ->
+                return@setOnCheckedChangeListener
+            }
+
+           rdbSim.setOnClickListener() {
                 itemListner.recyclerViewRadioButton(it, perguntaResposta, true)
             }
             rdbNao.setOnClickListener() {

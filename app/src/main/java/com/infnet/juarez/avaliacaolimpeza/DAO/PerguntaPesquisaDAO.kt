@@ -22,7 +22,7 @@ class PerguntaPesquisaDAO {
     }
 
     fun alterar(perguntaPesquisa: PerguntaPesquisa): PerguntaPesquisa {
-        val ref: DocumentReference = db.collection(collection).document()
+        val ref: DocumentReference = db.collection(collection).document(perguntaPesquisa.id.toString())
         ref.set(perguntaPesquisa).addOnSuccessListener {
         }.addOnFailureListener { }
         return perguntaPesquisa

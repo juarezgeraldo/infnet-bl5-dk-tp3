@@ -65,6 +65,12 @@ class PesquisaPerguntaFragment : Fragment(), RecyclerViewItemListner {
         val txtNomePesquisaPergunta =
             fragmentBinding.findViewById<TextView>(R.id.txtNomePesquisaPergunta)
         val btnSalvar = fragmentBinding.findViewById<Button>(R.id.btnSalvarPesquisa)
+        val fabPesquisaPerguntaLogout = fragmentBinding.findViewById<FloatingActionButton>(R.id.fabPesquisaPerguntaLogout)
+
+        fabPesquisaPerguntaLogout.setOnClickListener(){
+            findNavController().navigate(R.id.action_pesquisaPerguntaFragment_to_loginFragment)
+        }
+
 
         txtUsuario.setText(usuario.email)
         txtNomeEstabelecimento.setText(estabelecimento.nome)
@@ -79,8 +85,6 @@ class PesquisaPerguntaFragment : Fragment(), RecyclerViewItemListner {
                 perguntaPesquisa.id = null
                 perguntaPesquisaDAO.inserir(perguntaPesquisa)
             }else{
-                perguntaPesquisa.id = idPerguntaPesquisa
-                perguntaPesquisa.perguntaResposta = perguntasRespostas
                 perguntaPesquisaDAO.alterar(perguntaPesquisa)
             }
 
@@ -152,18 +156,14 @@ class PesquisaPerguntaFragment : Fragment(), RecyclerViewItemListner {
         }
     }
 
-    override fun recyclerViewBotaoAlterarClicked(view: View, id: String) {
+    override fun recyclerViewBotaoAlterarClicked(view: View, pos: Int) {
     }
 
-    override fun recyclerViewBotaoExcluirClicked(view: View, id: String): Boolean {
+    override fun recyclerViewBotaoExcluirClicked(view: View, pos: Int): Boolean {
         return false
     }
 
-    override fun recyclerViewBotaoEditaClicked(
-        view: View,
-        idPesquisa: String,
-        idEstabelecimento: String
-    ) {
+    override fun recyclerViewBotaoEditaClicked(view: View, pos: Int) {
     }
 
     override fun recyclerViewRadioButton(
@@ -171,10 +171,7 @@ class PesquisaPerguntaFragment : Fragment(), RecyclerViewItemListner {
         perguntaResposta: PerguntaResposta,
         resposta: Boolean
     ) {
-        for (pos in perguntasRespostas.indices) {
-            if (perguntasRespostas[pos].id == perguntaResposta.id) {
-                perguntasRespostas[pos].resposta = resposta
-            }
-        }
+//        perguntaResposta.resposta = resposta
+
     }
 }

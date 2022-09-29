@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import android.widget.Spinner
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.infnet.juarez.avaliacaolimpeza.modelo.Pesquisa
@@ -41,24 +40,22 @@ class ListaPesquisaAdapter(private val listaPesquisas: ArrayList<Pesquisa>) :
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindItem(pesquisa: Pesquisa, itemListner: RecyclerViewItemListner, position: Int) {
-            val txtListaIdPesquisa = itemView.findViewById<TextView>(R.id.txtIdPesquisa)
-            txtListaIdPesquisa.setText(pesquisa.id)
-            val txtListaNomePesquisa = itemView.findViewById<TextView>(R.id.txtNomePesquisa)
+            val txtListaNomePesquisa = itemView.findViewById<TextView>(R.id.txtListaNomePesquisa)
             txtListaNomePesquisa.setText(pesquisa.nomePesquisa)
-            val txtIdEstabelecimento = itemView.findViewById<TextView>(R.id.txtIdEstabelecimento)
-            txtIdEstabelecimento.setText(pesquisa.estabelecimento?.id ?: null)
+            val txtListaNomeEstabelecimento = itemView.findViewById<TextView>(R.id.txtListaNomeEstabelecimento)
+            txtListaNomeEstabelecimento.setText(pesquisa.estabelecimento?.nome)
             val btnExcluirPesquisa = itemView.findViewById<ImageButton>(R.id.btnExcluirPesquisa)
             val btnAlterarPesquisa = itemView.findViewById<ImageButton>(R.id.btnAlterarPesquisa)
             val btnEditaPesquisa = itemView.findViewById<ImageButton>(R.id.btnEditaPesquisa)
 
             btnExcluirPesquisa.setOnClickListener() {
-                itemListner.recyclerViewBotaoExcluirClicked(it, txtListaIdPesquisa.text.toString())
+                itemListner.recyclerViewBotaoExcluirClicked(it, position)
             }
             btnAlterarPesquisa.setOnClickListener() {
-                itemListner.recyclerViewBotaoAlterarClicked(it, txtListaIdPesquisa.text.toString())
+                itemListner.recyclerViewBotaoAlterarClicked(it, position)
             }
             btnEditaPesquisa.setOnClickListener() {
-                itemListner.recyclerViewBotaoEditaClicked(it, txtListaIdPesquisa.text.toString(), txtIdEstabelecimento.text.toString())
+                itemListner.recyclerViewBotaoEditaClicked(it, position)
             }
         }
     }

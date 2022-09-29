@@ -24,7 +24,7 @@ class PesquisaDAO {
     }
 
     fun alterar(pesquisa: Pesquisa): Pesquisa {
-        val ref: DocumentReference = db.collection(collection).document()
+        val ref: DocumentReference = db.collection(collection).document(pesquisa.id.toString())
         ref.set(pesquisa).addOnSuccessListener() {
         }.addOnFailureListener {
         }

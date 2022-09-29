@@ -37,31 +37,17 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/lblId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Id:" />
-
-            <TextView
-                android:id="@+id/txtId"
-                android:layout_width="281dp"
-                android:layout_height="match_parent" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
                 android:id="@+id/lblUsuario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Usuário:" />
+                android:text="Usuário:"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtUsuario"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
         </TableRow>
 
         <TableRow
@@ -72,12 +58,14 @@
                 android:id="@+id/lblNomePesquisaPergunta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nome Pesquisa:" />
+                android:text="Nome Pesquisa:"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtNomePesquisaPergunta"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="20sp" />
         </TableRow>
 
         <TableRow
@@ -88,13 +76,15 @@
                 android:id="@+id/lblEstabelecimentoPergunta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Estabelecimento:" />
+                android:text="Estabelecimento:"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/txtNomeEstabelecimento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="20sp" />
 
         </TableRow>
 
@@ -136,5 +126,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabPesquisaPerguntaLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:src="@drawable/common_full_open_on_phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
