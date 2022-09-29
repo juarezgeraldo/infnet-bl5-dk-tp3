@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navegacao"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.infnet.juarez.avaliacaolimpeza.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_pesquisaFragment"
+            app:destination="@id/pesquisaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pesquisaFragment"
+        android:name="com.infnet.juarez.avaliacaolimpeza.PesquisaFragment"
+        android:label="fragment_pesquisa"
+        tools:layout="@layout/fragment_pesquisa" >
+        <action
+            android:id="@+id/action_pesquisaFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_pesquisaFragment_to_pesquisaPerguntaFragment"
+            app:destination="@id/pesquisaPerguntaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pesquisaPerguntaFragment"
+        android:name="com.infnet.juarez.avaliacaolimpeza.PesquisaPerguntaFragment"
+        android:label="fragment_pesquisa_pergunta"
+        tools:layout="@layout/fragment_pesquisa_pergunta" >
+        <action
+            android:id="@+id/action_pesquisaPerguntaFragment_to_pesquisaFragment"
+            app:destination="@id/pesquisaFragment" />
+        <action
+            android:id="@+id/action_pesquisaPerguntaFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+</navigation>
