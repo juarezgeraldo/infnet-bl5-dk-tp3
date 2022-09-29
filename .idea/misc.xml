@@ -4,9 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Projetos/CursosDiversos/Graduacao/Bloco5/DesenvolvimentoKotlin/TPs/TP3/infnet-bl5-dk-tp3/app/src/main/res/layout/activity_main.xml" value="0.2558876811594203" />
+        <entry key="..\:/Projetos/CursosDiversos/Graduacao/Bloco5/DesenvolvimentoKotlin/TPs/TP3/infnet-bl5-dk-tp3/app/src/main/res/layout/fragment_estabelecimento.xml" value="0.3098958333333333" />
+        <entry key="..\:/Projetos/CursosDiversos/Graduacao/Bloco5/DesenvolvimentoKotlin/TPs/TP3/infnet-bl5-dk-tp3/app/src/main/res/layout/fragment_estatistica.xml" value="0.2988679352838745" />
         <entry key="..\:/Projetos/CursosDiversos/Graduacao/Bloco5/DesenvolvimentoKotlin/TPs/TP3/infnet-bl5-dk-tp3/app/src/main/res/layout/fragment_login.xml" value="0.2109375" />
+        <entry key="..\:/Projetos/CursosDiversos/Graduacao/Bloco5/DesenvolvimentoKotlin/TPs/TP3/infnet-bl5-dk-tp3/app/src/main/res/layout/fragment_menu.xml" value="0.3098958333333333" />
         <entry key="..\:/Projetos/CursosDiversos/Graduacao/Bloco5/DesenvolvimentoKotlin/TPs/TP3/infnet-bl5-dk-tp3/app/src/main/res/layout/fragment_pesquisa.xml" value="0.2988679352838745" />
         <entry key="..\:/Projetos/CursosDiversos/Graduacao/Bloco5/DesenvolvimentoKotlin/TPs/TP3/infnet-bl5-dk-tp3/app/src/main/res/layout/fragment_pesquisa_pergunta.xml" value="0.3098958333333333" />
+        <entry key="..\:/Projetos/CursosDiversos/Graduacao/Bloco5/DesenvolvimentoKotlin/TPs/TP3/infnet-bl5-dk-tp3/app/src/main/res/layout/lista_estabelecimentos.xml" value="0.2264151024877837" />
         <entry key="..\:/Projetos/CursosDiversos/Graduacao/Bloco5/DesenvolvimentoKotlin/TPs/TP3/infnet-bl5-dk-tp3/app/src/main/res/layout/lista_perguntas_respostas.xml" value="0.3098958333333333" />
         <entry key="..\:/Projetos/CursosDiversos/Graduacao/Bloco5/DesenvolvimentoKotlin/TPs/TP3/infnet-bl5-dk-tp3/app/src/main/res/layout/lista_pesquisas.xml" value="0.2988679352838745" />
       </map>

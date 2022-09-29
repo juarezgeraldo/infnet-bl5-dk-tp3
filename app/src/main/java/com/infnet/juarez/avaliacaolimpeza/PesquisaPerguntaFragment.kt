@@ -51,7 +51,7 @@ class PesquisaPerguntaFragment : Fragment(), RecyclerViewItemListner {
         pesquisa = sharedViewModel.recuperaPesquisa()!!
 
         if (usuario == null) {
-            findNavController().navigate(R.id.action_pesquisaPerguntaFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_pesquisaPerguntaFragment_to_menuFragment)
         }
 
         atualizaListaPerguntas()
@@ -68,7 +68,7 @@ class PesquisaPerguntaFragment : Fragment(), RecyclerViewItemListner {
         val fabPesquisaPerguntaLogout = fragmentBinding.findViewById<FloatingActionButton>(R.id.fabPesquisaPerguntaLogout)
 
         fabPesquisaPerguntaLogout.setOnClickListener(){
-            findNavController().navigate(R.id.action_pesquisaPerguntaFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_pesquisaPerguntaFragment_to_menuFragment)
         }
 
 

@@ -7,6 +7,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.infnet.juarez.avaliacaolimpeza.modelo.Pesquisa
+import com.infnet.juarez.avaliacaolimpeza.modelo.Usuario
 
 class PesquisaDAO {
     private val collection = "pesquisas_collection"
@@ -43,8 +44,9 @@ class PesquisaDAO {
         return db.collection(collection).document(id).get()
     }
 
-    fun listar(): Task<QuerySnapshot> {
-        return db.collection(collection).get()
+    fun listar(usuario: Usuario): Task<QuerySnapshot> {
+        return db.collection(collection)
+            .whereEqualTo("user.id", usuario.id).get()
     }
 
 }

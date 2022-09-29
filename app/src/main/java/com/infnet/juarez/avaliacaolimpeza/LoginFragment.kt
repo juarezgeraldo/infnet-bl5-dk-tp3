@@ -56,7 +56,7 @@ class LoginFragment : Fragment() {
         val fragmentBinding = inflater.inflate(R.layout.fragment_login, container, false)
 
         if (mUser != null) {
-            findNavController().navigate(R.id.action_loginFragment_to_pesquisaFragment)
+            mUser = null
         }
 
         txtEmail = fragmentBinding.findViewById(R.id.txtEmail)
@@ -83,7 +83,7 @@ class LoginFragment : Fragment() {
 
                             sharedViewModel.registraUsusario(usuario)
 
-                            findNavController().navigate(R.id.action_loginFragment_to_pesquisaFragment)
+                            findNavController().navigate(R.id.action_loginFragment_to_menuFragment)
                         } else {
                             Log.i("ERRO ENTRAR LOGIN", it.exception!!.message.toString())
                             Toast.makeText(
@@ -115,7 +115,7 @@ class LoginFragment : Fragment() {
 
                             sharedViewModel.registraUsusario(usuario)
 
-                            findNavController().navigate(R.id.action_loginFragment_to_pesquisaFragment)
+                            findNavController().navigate(R.id.action_loginFragment_to_menuFragment)
                         } else {
                             Log.i("ERRO CRIAÇÃO LOGIN", it.exception!!.message.toString())
                             Toast.makeText(
@@ -186,7 +186,7 @@ class LoginFragment : Fragment() {
                 usuario.dataUltimoAcesso = mUser!!.metadata!!.lastSignInTimestamp.toString()
                 sharedViewModel.registraUsusario(usuario)
 
-                findNavController().navigate(R.id.action_loginFragment_to_pesquisaFragment)
+                findNavController().navigate(R.id.action_loginFragment_to_menuFragment)
             }
         }
     }

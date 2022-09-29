@@ -48,7 +48,7 @@ class PesquisaFragment : Fragment(), RecyclerViewItemListner {
         usuario = sharedViewModel.recuperaUsusario()!!
 
         if (usuario == null) {
-            findNavController().navigate(R.id.action_pesquisaFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_pesquisaFragment_to_menuFragment)
         }
 
         val txtId = fragmentBinding.findViewById<TextView>(R.id.txtId)
@@ -61,7 +61,7 @@ class PesquisaFragment : Fragment(), RecyclerViewItemListner {
         txtUserPesquisa.setText(usuario.email)
 
         fabPesquisaLogout.setOnClickListener(){
-            findNavController().navigate(R.id.action_pesquisaFragment_to_loginFragment)
+            findNavController().navigate(R.id.action_pesquisaFragment_to_menuFragment)
         }
         btnSalvar.setOnClickListener {
             if (edtNomePesquisa.text.toString().isEmpty()) {
@@ -120,7 +120,7 @@ class PesquisaFragment : Fragment(), RecyclerViewItemListner {
     }
 
     private fun atualizaListaPesquisas() {
-        val obj = pesquisaDAO.listar()
+        val obj = pesquisaDAO.listar(usuario)
         val pesquisas: ArrayList<Pesquisa> = ArrayList()
         idPesquisas = ArrayList()
         idEstabelecimentos = ArrayList()

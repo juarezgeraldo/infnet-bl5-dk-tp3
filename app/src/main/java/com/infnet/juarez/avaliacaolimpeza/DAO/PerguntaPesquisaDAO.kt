@@ -37,7 +37,7 @@ class PerguntaPesquisaDAO {
 
     fun listarEstatistica(): Task<QuerySnapshot> {
         return db.collection(collection)
-//            .orderBy("pesquisa.estabelecimento.bairro")
+            .orderBy("pesquisa.estabelecimento.bairro")
 //            .orderBy("perguntaResposta.pergunta")
             .get()
     }
